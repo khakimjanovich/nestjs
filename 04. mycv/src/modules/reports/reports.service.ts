@@ -4,6 +4,7 @@ import {Repository} from 'typeorm';
 import {CreateReportDto} from "./dtos/create-report.dto";
 import {Report} from "./report.entity";
 import {User} from "../users/user.entity";
+import {GetEstimateDto} from './dtos/get-estimate.dto';
 
 @Injectable()
 export class ReportsService {
@@ -25,6 +26,21 @@ export class ReportsService {
 
         report.approved = approved
         return this.reportsRepository.save(report)
+    }
+
+    createEstimate({make, model, ltd, lng, mileage, year}: GetEstimateDto) {
+        return this.reportsRepository.createQueryBuilder()
+            .select('AVG(price)', 'price')
+            .where('make = :make', {make})
+            .andWhere('model = :model', {model})
+            .andWhere('lng - :lng BETWEEN -5 and 5', {lng})
+            .andWhere('ltd - :ltd BETWEEN -5 and 5', {ltd})
+            .andWhere('year - :year BETWEEN -3 and 3', {year})
+            .andWhere('approved IS TRUE')
+            .orderBy('ABS(mileage - :mileage)', 'DESC')
+            .setParameters({mileage})
+            .limit(3)
+            .getRawMany()
     }
 
     private async findOneById(id: number) {
