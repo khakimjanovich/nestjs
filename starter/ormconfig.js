@@ -8,12 +8,14 @@ const dbConfig = {
 if (process.env.NODE_ENV === "development") {
   Object.assign(dbConfig, {
     type: "sqlite",
+    synchronize: true,
     database: "db.sqlite",
     entities: ["**/*.entity.js"]
   });
 } else if (process.env.NODE_ENV === "test") {
   Object.assign(dbConfig, {
     type: "sqlite",
+    synchronize: true,
     database: "test.sqlite",
     entities: ["**/*.entity.ts"],
     migrationsRun: true

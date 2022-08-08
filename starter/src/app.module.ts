@@ -1,12 +1,10 @@
-import { Module } from "@nestjs/common";
-import { AppController } from "./app.controller";
-import { AppService } from "./app.service";
+import { Module, ValidationPipe } from "@nestjs/common";
 import { PermissionsModule } from "./permissions/permissions.module";
-import { RolesModule } from "./roles/roles.module";
-import { UsersModule } from "./users/users.module";
-import { AuthModule } from "./auth/auth.module";
 import { ConfigModule } from "@nestjs/config";
 import { TypeOrmModule } from "@nestjs/typeorm";
+import { APP_PIPE } from "@nestjs/core";
+import { RolesModule } from "./roles/roles.module";
+import { UsersModule } from "./users/users.module";
 
 const settings = require("../ormconfig.js");
 
@@ -20,10 +18,15 @@ const settings = require("../ormconfig.js");
     PermissionsModule,
     RolesModule,
     UsersModule,
-    AuthModule
+    // AuthModule
   ],
-  controllers: [AppController],
-  providers: [AppService]
+  controllers: [],
+  providers: [{
+    provide: APP_PIPE,
+    useValue: new ValidationPipe({
+      whitelist: true
+    })
+  }]
 })
 export class AppModule {
 }

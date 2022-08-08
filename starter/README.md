@@ -26,14 +26,15 @@ In the project there will be these dependencies
 
 ### Day one
 
-The aim is to:
+1. The aim is to create production/development/test modes' setup for database
 
-* create production/development/test modes setup for database
-*
-
-Installed database dependencies for type orm and config module
+Installed database dependencies for type orm and config module to handle to 
+configuration for different modes
 
 ```    
-    npm install --save @nestjs/typeorm typeorm pg config sqlite3 cross-env
+    npm install --save @nestjs/typeorm typeorm pg config sqlite3 cross-env class-validator class-transformer
     npm install --save-dev @nestjs/config
 ```
+
+2. 
+
