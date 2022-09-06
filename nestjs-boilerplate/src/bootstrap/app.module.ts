@@ -13,7 +13,6 @@ import { ForgotModule } from "../modules/forgot/forgot.module";
 import { HomeModule } from "../modules/home/home.module";
 import { DataSource } from "typeorm";
 
-console.log(__dirname);
 
 @Module({
   imports: [
