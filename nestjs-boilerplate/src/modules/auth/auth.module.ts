@@ -22,13 +22,14 @@ import { IsNotExist } from "src/bootstrap/utils/validators/is-not-exists.validat
       useFactory: (configService: ConfigService) => ({
         secret: configService.get("auth.secret"),
         signOptions: {
-          expiresIn: configService.get("auth.expires"),
-        },
-      }),
-    }),
+          expiresIn: configService.get("auth.expires")
+        }
+      })
+    })
   ],
   controllers: [AuthController],
   providers: [IsExist, IsNotExist, AuthService, JwtStrategy, AnonymousStrategy],
-  exports: [AuthService],
+  exports: [AuthService]
 })
-export class AuthModule {}
+export class AuthModule {
+}

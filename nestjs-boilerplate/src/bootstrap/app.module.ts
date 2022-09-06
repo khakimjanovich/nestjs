@@ -19,19 +19,20 @@ import { DataSource } from "typeorm";
     ConfigModule.forRoot({
       isGlobal: true,
       load: [databaseConfig, authConfig, appConfig, fileConfig],
-      envFilePath: [".env"],
+      envFilePath: [".env"]
     }),
     TypeOrmModule.forRootAsync({
       useClass: TypeOrmConfigService,
       dataSourceFactory: async (options) => {
         return await new DataSource(options).initialize();
-      },
+      }
     }),
     UsersModule,
     FilesModule,
     AuthModule,
     ForgotModule,
-    HomeModule,
-  ],
+    HomeModule
+  ]
 })
-export class AppModule {}
+export class AppModule {
+}

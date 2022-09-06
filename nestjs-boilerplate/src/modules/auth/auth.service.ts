@@ -20,7 +20,7 @@ export class AuthService {
   constructor(
     private jwtService: JwtService,
     private usersService: UsersService,
-    private forgotService: ForgotService,
+    private forgotService: ForgotService
   ) {
   }
 

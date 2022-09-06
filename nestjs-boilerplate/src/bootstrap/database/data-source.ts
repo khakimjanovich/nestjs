@@ -13,12 +13,12 @@ export const AppDataSource = new DataSource({
   dropSchema: false,
   keepConnectionAlive: true,
   logging: process.env.NODE_ENV !== "production",
-  entities: ["src/modules/**/entities/*.entity{.ts,.js}"],
-  migrations: ["src/bootstrap/database/migrations/**/*{.ts,.js}"],
+  entities: ["./src/modules/**/entities/*.entity{.ts,.js}"],
+  migrations: ["./src/bootstrap/database/migrations/**/*{.ts,.js}"],
   cli: {
     entitiesDir: "src",
     migrationsDir: "src/database/migrations",
-    subscribersDir: "subscriber",
+    subscribersDir: "subscriber"
   },
   extra: {
     // based on https://node-postgres.com/api/pool
@@ -27,12 +27,12 @@ export const AppDataSource = new DataSource({
     ssl:
       process.env.DATABASE_SSL_ENABLED === "true"
         ? {
-            rejectUnauthorized:
-              process.env.DATABASE_REJECT_UNAUTHORIZED === "true",
-            ca: process.env.DATABASE_CA ?? undefined,
-            key: process.env.DATABASE_KEY ?? undefined,
-            cert: process.env.DATABASE_CERT ?? undefined,
-          }
-        : undefined,
-  },
+          rejectUnauthorized:
+            process.env.DATABASE_REJECT_UNAUTHORIZED === "true",
+          ca: process.env.DATABASE_CA ?? undefined,
+          key: process.env.DATABASE_KEY ?? undefined,
+          cert: process.env.DATABASE_CERT ?? undefined
+        }
+        : undefined
+  }
 } as DataSourceOptions);
